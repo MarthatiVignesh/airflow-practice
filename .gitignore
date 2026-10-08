@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+
+airflow-venv/
+.venv/
+venv/
+
+airflow.db
+*.db
+
+logs/
+*.log
+
+.env

@@ -21,8 +21,10 @@ airflow-practice/
 │       │   └── hello_workflow.py
 │       ├── exercise_2/
 │       │   └── scheduled_workflows.py
-│       └── exercise_3/
-│           └── customer_pipeline.py
+│       ├── exercise_3/
+│       │   └── customer_pipeline.py
+│       └── exercise_4/
+│           └── etl_ui_practice.py
 │
 ├── docs/
 │   └── screenshots/
@@ -33,10 +35,15 @@ airflow-practice/
 │       │   ├── airflow-dag-list.png
 │       │   ├── daily-sales-graph.png
 │       │   └── weekly-customer-report-graph.png
-│       └── exercise_3/
+│       ├── exercise_3/
+│       │   ├── airflow-dag-list.png
+│       │   ├── customer-pipeline-graph.png
+│       │   └── customer-pipeline-run.png
+│       └── exercise_4/
 │           ├── airflow-dag-list.png
-│           ├── customer-pipeline-graph.png
-│           └── customer-pipeline-run.png
+│           ├── etl-graph.png
+│           ├── etl-run.png
+│           └── etl-task-details.png
 │
 └── README.md
 ```
@@ -198,6 +205,58 @@ All tasks completed successfully and the DAG run finished with:
 ```text
 state=success
 ```
+
+## Exercise 4 - ETL UI Practice
+
+Exercise 4 demonstrates a simple ETL workflow and practice with the Airflow UI.
+
+### DAG Flow
+
+```text
+Extract
+  ↓
+Transform
+  ↓
+Load
+  ↓
+Notify
+```
+
+### DAG ID
+
+```text
+etl_ui_practice
+```
+
+### Tasks
+
+1. `extract` - Extracts data
+2. `transform` - Transforms data
+3. `load` - Loads data
+4. `notify` - Notifies that the ETL process completed successfully
+
+### Testing
+
+The DAG was tested successfully using:
+
+```bash
+airflow dags test etl_ui_practice 2026-10-08
+```
+
+All four tasks completed successfully and the DAG run finished with:
+
+```text
+state=success
+```
+
+### Airflow UI Practice
+
+The exercise includes screenshots of:
+
+- DAG list
+- ETL graph
+- Successful DAG run
+- Task details
 
 ## Airflow UI
 

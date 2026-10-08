@@ -19,14 +19,24 @@ airflow-practice/
 │   └── exercises/
 │       ├── exercise_1/
 │       │   └── hello_workflow.py
-│       └── exercise_2/
-│           └── scheduled_workflows.py
+│       ├── exercise_2/
+│       │   └── scheduled_workflows.py
+│       └── exercise_3/
+│           └── customer_pipeline.py
 │
 ├── docs/
 │   └── screenshots/
-│       └── exercise_1/
+│       ├── exercise_1/
+│       │   ├── airflow-dag-list.png
+│       │   └── airflow-graph.png
+│       ├── exercise_2/
+│       │   ├── airflow-dag-list.png
+│       │   ├── daily-sales-graph.png
+│       │   └── weekly-customer-report-graph.png
+│       └── exercise_3/
 │           ├── airflow-dag-list.png
-│           └── airflow-graph.png
+│           ├── customer-pipeline-graph.png
+│           └── customer-pipeline-run.png
 │
 └── README.md
 ```
@@ -132,6 +142,58 @@ airflow dags test weekly_customer_report 2026-10-08
 ```
 
 Both DAG runs completed with:
+
+```text
+state=success
+```
+
+## Exercise 3 - Customer Pipeline
+
+Exercise 3 demonstrates a customer data pipeline with **parallel task execution**.
+
+### DAG Flow
+
+```text
+             ┌──→ Validate Data ──┐
+Start ───────┤                    ├──→ Load Data ──→ Finish
+             └──→ Clean Data ─────┘
+```
+
+### DAG ID
+
+```text
+customer_pipeline
+```
+
+### Tasks
+
+1. `start` - Starts the customer pipeline
+2. `validate_data` - Validates customer data
+3. `clean_data` - Cleans customer data
+4. `load_data` - Loads the processed customer data
+5. `finish` - Completes the customer pipeline
+
+### Task Dependencies
+
+The `validate_data` and `clean_data` tasks run in parallel after `start`. Both tasks must complete before `load_data` runs.
+
+```text
+start
+  │
+  ├──→ validate_data ──┐
+  │                    ├──→ load_data ──→ finish
+  └──→ clean_data ─────┘
+```
+
+### Testing
+
+The DAG was tested successfully using:
+
+```bash
+airflow dags test customer_pipeline 2026-10-08
+```
+
+All tasks completed successfully and the DAG run finished with:
 
 ```text
 state=success
